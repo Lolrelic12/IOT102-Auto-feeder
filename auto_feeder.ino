@@ -4,11 +4,11 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  00:06 jan 29, 2024
+// last modified:  00:14 jan 29, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
-// version: beta 0.7.3
+// version: v0.7.4-beta
 // description: a machine that detects when food and water has run out and automatically attempts to refill
 // intelligently only carries out refills when it is safe to do so
 // perfect for use in cattle and poultry farming
