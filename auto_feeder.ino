@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  00:08 jan 30, 2024
+// last modified:  00:14 jan 30, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,17 +29,17 @@
 #include <Servo.h>
 
 
-const String version = "v0.9.7r4-beta";
+const String version = "v0.9.8r1-beta";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
 Servo feederBox;
 const int feederBoxPin = 8;
-const int close = 75, open = 20;
+const int close = 75, open = 20;  // values in degrees
 
 // pump is connected to external power source and controlled by a relay switch
 // this particular switch is low-active, so controls are inverted
-const int pumpRelayPin = 7;  
+const int pumpRelayPin = 7;
 
 // ultrasonic presence detector calibrations
 const int trigPin = 3, echoPin = 4;
@@ -49,22 +49,20 @@ const float distanceThreshold = 10;  // change to configure how close to the sen
 // photoresistor calibrations
 const int bowlBottom = A0, bowlTop = A1;
 bool bowlFull = true, bowlEmpty = false;
-int photoresMin = 1, photoresMax = 860;        // tune these values before running (measured with 330 ohm resistors)
-const float sensitivity = 0.025; // value from 0 to 1
+int photoresMin = 1, photoresMax = 860;  // tune these values before running (measured with 330 ohm resistors)
+const float sensitivity = 0.025;         // value from 0 to 1
 int photoresThreshold = (photoresMin + photoresMax) * sensitivity;
 
 // water sensor calibrations
 const int waterPowerPin = 6, waterReadPin = A2;
-const int waterEmpty = 0, waterFull = 450;    // tune these values before running
-const float multiplier = 0.95;  // value from 0 to 1, values closer to 1 means higher threshold
+const int waterEmpty = 0, waterFull = 450;  // tune these values before running
+const float multiplier = 0.95;              // value from 0 to 1, values closer to 1 means higher threshold
 const int waterThreshold = (waterEmpty + waterFull) * multiplier;
 int waterLevel = waterFull;
 
 
 void setup() {
-  if (serialDebug == true) {
-    Serial.begin(baudRate);
-  }
+  if (serialDebug == true) Serial.begin(baudRate);
 
   pinMode(bowlBottom, INPUT);
   pinMode(bowlTop, INPUT);
@@ -79,7 +77,7 @@ void setup() {
   feederBox.write(close);  // ensures feeder box is closed and  door secured
 
   pinMode(pumpRelayPin, OUTPUT);
-  digitalWrite(pumpRelayPin, HIGH); // ensures pump is off
+  digitalWrite(pumpRelayPin, HIGH);  // ensures pump is off
 }
 
 void loop() {
@@ -88,11 +86,8 @@ void loop() {
   bowlFull = dark(analogRead(bowlTop));
   waterLevel = measureWater();
   presence = detectPresence();
-  presence = false;
 
-  if (serialDebug == true) {
-    printDebug();
-  }
+  if (serialDebug == true) printDebug();
 
   // feeder box is open only when bowl is empty and it is not full and no presence is detected
   if (bowlEmpty && !bowlFull && !presence) {
@@ -119,11 +114,7 @@ void loop() {
 // checks photoresistor state based on readings
 // returns true if the photoresistor is obscured, otherwise return false
 bool dark(int reading) {
-  if (reading < photoresThreshold) {
-    return true;
-  } else {
-    return false;
-  }
+  return (reading < photoresThreshold) ? true : false;
 }
 
 // helper function
@@ -145,8 +136,7 @@ float measureDistance() {
 // detection threshold can be tuned (default is 50 cm)
 bool detectPresence() {
   float distance = measureDistance();
-  if (distance < distanceThreshold) return true;
-  return false;
+  return (distance <= distanceThreshold) ? true : false;
 }
 
 // measures water using water level sensor
