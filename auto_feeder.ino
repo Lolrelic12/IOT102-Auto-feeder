@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  23:31 jan 29, 2024
+// last modified:  00:08 jan 30, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v0.9.6r3-beta";
+const String version = "v0.9.7r4-beta";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -50,14 +50,14 @@ const float distanceThreshold = 10;  // change to configure how close to the sen
 const int bowlBottom = A0, bowlTop = A1;
 bool bowlFull = true, bowlEmpty = false;
 int photoresMin = 1, photoresMax = 860;        // tune these values before running (measured with 330 ohm resistors)
-const float photoresThresholdMultiplier = 0.02; // value from 0 to 1, values closer to 1 means higher threshold
-int photoresThreshold = (photoresMin + photoresMax) / (1 / photoresThresholdMultiplier);
+const float sensitivity = 0.025; // value from 0 to 1
+int photoresThreshold = (photoresMin + photoresMax) * sensitivity;
 
 // water sensor calibrations
 const int waterPowerPin = 6, waterReadPin = A2;
 const int waterEmpty = 0, waterFull = 450;    // tune these values before running
-const float waterThresholdMultiplier = 0.95;  // value from 0 to 1, values closer to 1 means higher threshold
-const int waterThreshold = (waterEmpty + waterFull) / (1 / waterThresholdMultiplier);
+const float multiplier = 0.95;  // value from 0 to 1, values closer to 1 means higher threshold
+const int waterThreshold = (waterEmpty + waterFull) * multiplier;
 int waterLevel = waterFull;
 
 
@@ -88,6 +88,7 @@ void loop() {
   bowlFull = dark(analogRead(bowlTop));
   waterLevel = measureWater();
   presence = detectPresence();
+  presence = false;
 
   if (serialDebug == true) {
     printDebug();
