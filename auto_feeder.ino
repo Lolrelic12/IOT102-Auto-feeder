@@ -4,11 +4,11 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  14:143 jan 29, 2024
+// last modified:  15:23 jan 29, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
-// version: v0.8.1-beta
+// version: v0.8.2-beta
 // description: a machine that detects when food and water has run out and automatically attempts to refill
 // intelligently only carries out refills when it is safe to do so
 // perfect for use in cattle and poultry farming
@@ -55,7 +55,7 @@ int waterLevel = waterFull;
 
 
 void setup() {
-  Serial.begin(9600);
+  // Serial.begin(9600);
 
   pinMode(bowlBottom, INPUT);
   pinMode(bowlTop, INPUT);
@@ -80,7 +80,7 @@ void loop() {
   waterLevel = measureWater();
   presence = detectPresence();
 
-  Serial.println(waterLevel);
+  // Serial.println(presence);
 
   // feeder box is open only when bowl is empty and it is not full and no presence is detected
   if (bowlEmpty && !bowlFull && !presence) { 
