@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  22:53 jan 30, 2024
+// last modified:  22:56 jan 30, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.1.0r2-release";
+const String version = "v1.1.0r3-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -40,6 +40,8 @@ const int loopDelay = 250;       // time interval in ms
 const unsigned long timeOutCount = timeOutInterval * 3600000 / loopDelay;
 int timeSinceLastUpdate = 0;
 
+// the feeder box has 2 states: closed and open
+// these values can be changed to suit a particular installation
 Servo feederBox;
 const int feederBoxPin = 8;
 const int close = 75, open = 20;  // values in degrees
