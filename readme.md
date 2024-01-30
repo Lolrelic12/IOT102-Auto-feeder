@@ -13,11 +13,11 @@ A machine that monitors feed bowls and water bowls to automatically carry out re
 - Intelligent operation: refills are only carried out when called for and when it is safe to do so
 
 ## Operation
-The system works on a simple open-looped mechanism to (i)control a feedbox and (ii)drive a pump. 
-The feed bowl state is determined by 2 photoresistors: 1 at the top of the bowl and the other situated at the bottom. When both photoresistor detect light, the system will assume that the bowl is empty, and the feedbox will be opened. When the bottom sensor is obscured, but the top sensor is not, the bowl is in its nominal state. When both sensorrs are obscured, the system will take that for the bowl being completely full. In both of the latter case, the feedbox is closed.
-Note that to prevent overfill, the top sensor is programmed to override the bottom. *As long as the top sensor is obscured, the feedbox will never open.*
-Both of these sensors has a sensitivity value in the range of [0, 1] to determine how sensitive they are to changes in lighting conditions. Values closer to 1 means it is easier to be obscured.
-The water pump is controlled by a relay driven by a water level sensor. This sensor has a set lower and upper threshold, as well as a low threshold. Once the water goes below this lower threshold, the pump is turned on. Pumping stops when the max threshold is reached.
+The system works on a simple open-looped mechanism to (i)control a feedbox and (ii)drive a pump. <br>
+The feed bowl state is determined by 2 photoresistors: 1 at the top of the bowl and the other situated at the bottom. When both photoresistor detect light, the system will assume that the bowl is empty, and the feedbox will be opened. When the bottom sensor is obscured, but the top sensor is not, the bowl is in its nominal state. When both sensorrs are obscured, the system will take that for the bowl being completely full. In both of the latter case, the feedbox is closed.<br>
+Note that to prevent overfill, the top sensor is programmed to override the bottom. *As long as the top sensor is obscured, the feedbox will never open.*<br>
+Both of these sensors has a sensitivity value in the range of [0, 1] to determine how sensitive they are to changes in lighting conditions. Values closer to 1 means it is easier to be obscured.<br>
+The water pump is controlled by a relay driven by a water level sensor. This sensor has a set lower and upper threshold, as well as a low threshold. Once the water goes below this lower threshold, the pump is turned on. Pumping stops when the max threshold is reached.<br>
 The water level sensor has a multiplier value [0, 1] to determine the low threshold. Values closer to 1 push the threshold higher.
 
 ## Hardware used
