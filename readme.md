@@ -26,6 +26,8 @@ The water level sensor has a multiplier value [0, 1] to determine the low thresh
 
 After a predetermined time interval (default is 72h) and the system detects no changes on the presence detector sensor, it will assume that it is not in active use, i.e. no animals are present on the premise at all. It will then timeout and proceed to shutdown, requiring a manual restart to be used again.
 
+Consult the following flow chart for a visualization of the operation:
+![Program flow chart](flow_chart.png?raw=true)
 
 ## Hardware used
 - Microcontroller: Arduino Uno R3
