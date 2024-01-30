@@ -35,7 +35,7 @@ The water level sensor has a multiplier value [0, 1] to determine the low thresh
 ## Build schematics
 An *incomplete* build schematic can be found at: https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder
 This doesn't include all hardware components since Tinkercad has yet to include components used in the water subsystem.
-All pinout is included in the firmware file. These values can also be modified to adapt to different build requirements.
+All pinout is included in the firmware file. These values can be modified to adapt to different build requirements.
 
 ## Notes
 - Set the debug flag `serialDebug` to `true` to enable debugging. Remember to use the correct baud rate.
@@ -43,4 +43,10 @@ All pinout is included in the firmware file. These values can also be modified t
 - For best sensor readings, resistance sensors should be connected to the Arduino's 5v output. <br>The HY-SRF05, however, should be connected to the external 5v rail.
 - Actuator components are to be suppliied by an external power source.
 - Avoid running the pump dry. Prolonged pumping without water can damage the pump.
-- The JQC-3FF-S-Z is a low leveltrigger relay. As such, its controls are inverted.
+- The JQC-3FF-S-Z is a low level trigger relay. As such, its controls are inverted.
+
+## To-do
+- Optimize program loop
+- Add auditory alert during pumping (optional)
+- Generate 3D models (recommended but not required)
+- Finish system schematics
