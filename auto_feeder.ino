@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  22:56 jan 30, 2024
+// last modified:  23:09 jan 30, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.1.0r3-release";
+const String version = "v1.1.1r0-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -90,8 +90,6 @@ void setup() {
 }
 
 void loop() {
-  if (timeSinceLastUpdate >= timeOutCount) return;
-
   // reads bowl state and detect presence
   bowlEmpty = !dark(analogRead(bowlBottom));
   bowlFull = dark(analogRead(bowlTop));
@@ -119,11 +117,14 @@ void loop() {
     digitalWrite(pumpRelayPin, HIGH);
   }
 
+  // advances timeout counter if presence status does not change
   if (presence == prevPresence) {
     timeSinceLastUpdate++;
   } else {
     timeSinceLastUpdate = 0;
   }
+
+  if (timeSinceLastUpdate >= timeOutCount) return;
 
   prevPresence = presence;
   
