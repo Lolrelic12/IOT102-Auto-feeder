@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  00:14 jan 30, 2024
+// last modified:  16:28 jan 30, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v0.9.8r1-beta";
+const String version = "v1.0.2r0-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -54,7 +54,7 @@ const float sensitivity = 0.025;         // value from 0 to 1
 int photoresThreshold = (photoresMin + photoresMax) * sensitivity;
 
 // water sensor calibrations
-const int waterPowerPin = 6, waterReadPin = A2;
+const int waterReadPin = A2;
 const int waterEmpty = 0, waterFull = 450;  // tune these values before running
 const float multiplier = 0.95;              // value from 0 to 1, values closer to 1 means higher threshold
 const int waterThreshold = (waterEmpty + waterFull) * multiplier;
@@ -70,7 +70,6 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  pinMode(waterPowerPin, OUTPUT);
   pinMode(waterReadPin, INPUT);
 
   feederBox.attach(feederBoxPin);
@@ -84,7 +83,7 @@ void loop() {
   // reads bowl state and detect presence
   bowlEmpty = !dark(analogRead(bowlBottom));
   bowlFull = dark(analogRead(bowlTop));
-  waterLevel = measureWater();
+  waterLevel = analogRead(waterReadPin);;
   presence = detectPresence();
 
   if (serialDebug == true) printDebug();
@@ -137,16 +136,6 @@ float measureDistance() {
 bool detectPresence() {
   float distance = measureDistance();
   return (distance <= distanceThreshold) ? true : false;
-}
-
-// measures water using water level sensor
-// returns an integer signifying the water level in the container
-int measureWater() {
-  digitalWrite(waterPowerPin, HIGH);
-  delay(10);
-  int val = analogRead(waterReadPin);
-  digitalWrite(waterPowerPin, LOW);
-  return val;
 }
 
 // for development use only

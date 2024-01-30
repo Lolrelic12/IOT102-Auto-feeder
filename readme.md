@@ -40,8 +40,9 @@ All pinout is included in the firmware file. These values can be modified to ada
 ## Notes
 - Set the debug flag `serialDebug` to `true` to enable debugging. Remember to use the correct baud rate.
 - After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs 4 times as slow.
-- For best sensor readings, resistance sensors should be connected to the Arduino's 5v output. <br>The HY-SRF05, however, should be connected to the external 5v rail.
-- Actuator components are to be suppliied by an external power source.
+- For best sensor readings, all sensors must be powered by the 5v rail from the Arduino.
+- The servo must be connected to the Arduino rail.
+- The pump is to be suppliied by an external power source.
 - Avoid running the pump dry. Prolonged pumping without water can damage the pump.
 - The JQC-3FF-S-Z is a low level trigger relay. As such, its controls are inverted.
 
