@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  16:28 jan 30, 2024
+// last modified:  22:53 jan 30, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,9 +29,16 @@
 #include <Servo.h>
 
 
-const String version = "v1.0.2r0-release";
+const String version = "v1.1.0r2-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
+
+// timeout values
+// after a determined period of time passes and no changes are registered on the presence detection sensor, the system stops working and must be manually restarted
+const unsigned long timeOutInterval = 72;  // time interval in hour
+const int loopDelay = 250;       // time interval in ms
+const unsigned long timeOutCount = timeOutInterval * 3600000 / loopDelay;
+int timeSinceLastUpdate = 0;
 
 Servo feederBox;
 const int feederBoxPin = 8;
@@ -44,6 +51,7 @@ const int pumpRelayPin = 7;
 // ultrasonic presence detector calibrations
 const int trigPin = 3, echoPin = 4;
 bool presence = true;
+bool prevPresence = presence;
 const float distanceThreshold = 10;  // change to configure how close to the sensor is considered present, in cm
 
 // photoresistor calibrations
@@ -80,10 +88,13 @@ void setup() {
 }
 
 void loop() {
+  if (timeSinceLastUpdate >= timeOutCount) return;
+
   // reads bowl state and detect presence
   bowlEmpty = !dark(analogRead(bowlBottom));
   bowlFull = dark(analogRead(bowlTop));
-  waterLevel = analogRead(waterReadPin);;
+  waterLevel = analogRead(waterReadPin);
+  ;
   presence = detectPresence();
 
   if (serialDebug == true) printDebug();
@@ -98,7 +109,7 @@ void loop() {
   }
 
   // pump water in when the water level goes below the threshold
-  if (waterLevel <= waterThreshold) {
+  if (waterLevel <= waterThreshold && waterLevel < waterFull) {
     digitalWrite(pumpRelayPin, LOW);
   }
   // if the water bowl is full, pumping stops
@@ -106,7 +117,15 @@ void loop() {
     digitalWrite(pumpRelayPin, HIGH);
   }
 
-  delay(250);
+  if (presence == prevPresence) {
+    timeSinceLastUpdate++;
+  } else {
+    timeSinceLastUpdate = 0;
+  }
+
+  prevPresence = presence;
+  
+  delay(loopDelay);
 }
 
 
@@ -153,7 +172,12 @@ void printDebug() {
   }
   Serial.print("Detection range: ");
   Serial.print((int)distanceThreshold);
-  Serial.println("cm\n");
+  Serial.println("cm");
+  Serial.print("Main loop iterations since last update: ");
+  Serial.print(timeSinceLastUpdate);
+  Serial.print(" / ");
+  Serial.println(timeOutCount);
+  Serial.println();
 
   Serial.print("Bowl state: ");
   if (presence == true) {

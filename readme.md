@@ -4,21 +4,23 @@
 ## Introduction
 This is a project I made for my final project, as part of the IOT102 course at FPT University, semester Spring 2024.
 As this is only a proof-of-concept build, only the software and general build is available without a 3D model.
-However, with a 3d printer and some hot glue, this project can definitely be made to work.
+However, with a 3D printer and some hot glue, this project can definitely be made to work.
 
 ## Features
 A machine that monitors feed bowls and water bowls to automatically carry out refills!
 - Automatic, unattended refills for as long as supplies last
-- Accurate monitoring of amoount of remaining food and water
+- Accurate monitoring of amount of remaining food and water
 - Intelligent operation: refills are only carried out when called for and when it is safe to do so
 
 ## Operation
-The system works on a simple open-looped mechanism to (i)control a feedbox and (ii)drive a pump. <br>
-The feed bowl state is determined by 2 photoresistors: 1 at the top of the bowl and the other situated at the bottom. When both photoresistor detect light, the system will assume that the bowl is empty, and the feedbox will be opened. When the bottom sensor is obscured, but the top sensor is not, the bowl is in its nominal state. When both sensorrs are obscured, the system will take that for the bowl being completely full. In both of the latter case, the feedbox is closed.<br>
+The system works on a simple open-looped mechanism to (i) control a feedbox and (ii) drive a pump.<br>
+The feed bowl state is determined by 2 photoresistors: 1 at the top of the bowl and the other situated at the bottom. When both photoresistors detect light, the system will assume that the bowl is empty, and the feedbox will be opened. When the bottom sensor is obscured, but the top sensor is not, the bowl is in its nominal state. When both sensors are obscured, the system will take that for the bowl being completely full. In both of the latter cases, the feedbox is closed.<br>
 Note that to prevent overfill, the top sensor is programmed to override the bottom. *As long as the top sensor is obscured, the feedbox will never open.*<br>
 Both of these sensors has a sensitivity value in the range of [0, 1] to determine how sensitive they are to changes in lighting conditions. Values closer to 1 means it is easier to be obscured.<br>
 The water pump is controlled by a relay driven by a water level sensor. This sensor has a set lower and upper threshold, as well as a low threshold. Once the water goes below this lower threshold, the pump is turned on. Pumping stops when the max threshold is reached.<br>
-The water level sensor has a multiplier value [0, 1] to determine the low threshold. Values closer to 1 push the threshold higher.
+The water level sensor has a multiplier value [0, 1] to determine the low threshold. Values closer to 1 push the threshold higher.<br>
+After a predetermined time interval (default is 72h) and the system detects no changes on the presence detector sensor, it will assume that it is not in active use, i.e. no animals are present on the premise at all. It will then timeout and proceed to shutdown, requiring a manual restart to be used again.
+
 
 ## Hardware used
 - Microcontroller: Arduino Uno R3
@@ -42,7 +44,7 @@ All pinout is included in the firmware file. These values can be modified to ada
 - After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs 4 times as slow.
 - For best sensor readings, all sensors must be powered by the 5v rail from the Arduino.
 - The servo must be connected to the Arduino rail.
-- The pump is to be suppliied by an external power source.
+- The pump is to be supplied by an external power source.
 - Avoid running the pump dry. Prolonged pumping without water can damage the pump.
 - The JQC-3FF-S-Z is a low level trigger relay. As such, its controls are inverted.
 
