@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  14:00 jan 31, 2024
+// last modified:  14:27 jan 31, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -12,7 +12,7 @@
 // intelligently only carries out refills when it is safe to do so
 // perfect for use in cattle and poultry farming
 
-// system schematics (incomplete): https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder
+// system schematics (incomplete): https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder/editel?returnTo=/dashboard?collection=designs&sharecode=Eop9zU_BRC4AbcI0ykFd5Q39rgGpT1Hto60VDNmFsO0
 // hardware used:
 // microcontroller: arduino uno r3
 // presence detector: hy-srf05 ultrasonic distance sensor
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.2.1r1-release";
+const String version = "v1.2.1r2-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
