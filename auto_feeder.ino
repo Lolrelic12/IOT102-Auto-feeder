@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  23:16 jan 30, 2024
+// last modified:  13:34 jan 31, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -176,7 +176,7 @@ void printDebug() {
   Serial.print("Detection range: ");
   Serial.print((int)distanceThreshold);
   Serial.println("cm");
-  Serial.print("Main loop iterations since last update: ");
+  Serial.print("Time since last update: ");
   Serial.print(timeSinceLastUpdate);
   Serial.print(" / ");
   Serial.println(timeOutCount);
