@@ -29,15 +29,15 @@
 #include <Servo.h>
 
 
-const String version = "v1.1.3r1-release";
-const bool serialDebug = false;  // set to true to enable serial debugging
+const String version = "v1.2.1r0-release";
+const bool serialDebug = true;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
 // timeout values
 // after a determined period of time passes and no changes are registered on the presence detection sensor, the system halts and must be manually restarted
 const unsigned long timeoutInterval = 72;  // time interval in hour, default is 72h
 const int loopDelay = 250;                 // time interval in ms, default is 250ms
-const unsigned long timeoutCount = timeoutInterval * 3600000 / loopDelay;
+unsigned long timeoutCount = timeoutInterval * 3600000 / loopDelay;
 int timeSinceLastUpdate = 0;
 
 // the feeder box has 2 states: closed and open
@@ -73,6 +73,7 @@ int waterLevel = waterFull;
 
 void setup() {
   if (serialDebug == true) Serial.begin(baudRate);
+  timeoutCount = 5;
 
   pinMode(LED_BUILTIN, OUTPUT);
 
@@ -99,7 +100,7 @@ void loop() {
   ;
   presence = detectPresence();
 
-  if (serialDebug == true) printDebug();
+  
 
   // feeder box is open only when bowl is empty and it is not full and no presence is detected
   if (bowlEmpty && !bowlFull && !presence) {
@@ -126,6 +127,8 @@ void loop() {
     timeSinceLastUpdate = 0;
   }
 
+  if (serialDebug == true) printDebug();
+  
   if (timeSinceLastUpdate >= timeoutCount) timeout();
 
   prevPresence = presence;
