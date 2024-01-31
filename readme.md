@@ -42,7 +42,7 @@ Consult the following flow chart for a visualization of the operation:
 - Yellow LED
 
 ## Build schematics
-An *incomplete* build schematic can be found at: [Tinkercad schematic](https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder/editel?returnTo=/dashboard?collection=designs&sharecode=Eop9zU_BRC4AbcI0ykFd5Q39rgGpT1Hto60VDNmFsO0)
+An *incomplete* build schematic can be found at: [Tinkercad schematic](https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder/editel?returnTo=/dashboard?collection=designs&sharecode=Eop9zU_BRC4AbcI0ykFd5Q39rgGpT1Hto60VDNmFsO0)<br>
 This doesn't include all hardware components since Tinkercad has yet to include components used in the water subsystem.
 All pinout is included in the firmware file. These values can be modified to adapt to different build requirements.
 
