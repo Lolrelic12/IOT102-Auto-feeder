@@ -49,7 +49,7 @@ All pinout is included in the firmware file. These values can be modified to ada
 
 ## Notes
 - Set the debug flag `serialDebug` to `true` to enable debugging. Remember to use the correct baud rate.
-- After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs 4 times as slow in its default configuration.
+- After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs *at least* 4 times as slow in its default configuration.
 - For best sensor readings, all sensors must be powered by the 5v rail from the Arduino.
 - The servo must be connected to the Arduino rail.
 - The pump is to be supplied by an external power source.
