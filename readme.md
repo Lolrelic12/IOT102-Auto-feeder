@@ -60,6 +60,8 @@ All pinout is included in the firmware file. These values can be modified to ada
 - Avoid running the pump dry. Prolonged pumping without water can damage the pump.
 - The JQC-3FF-S-Z is a low level trigger relay. As such, its controls are inverted.
 
+## Extra links
+[Vietnamese report](https://docs.google.com/document/d/1vrBQ4KdNPboVzUOQJd9dsulbDxdBN5N17Y1EpZAObw8/edit#heading=h.bp8074mwg7ac)
 
 ## To-do
 - Optimize program loop
