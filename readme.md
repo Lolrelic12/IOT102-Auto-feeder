@@ -42,13 +42,13 @@ Consult the following flow chart for a visualization of the operation:
 - Yellow LED
 
 ## Build schematics
-An *incomplete* build schematic can be found at: https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder
+An *incomplete* build schematic can be found at: (Tinkercad schematic)[https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder/editel?returnTo=/dashboard?collection=designs&sharecode=Eop9zU_BRC4AbcI0ykFd5Q39rgGpT1Hto60VDNmFsO0]
 This doesn't include all hardware components since Tinkercad has yet to include components used in the water subsystem.
 All pinout is included in the firmware file. These values can be modified to adapt to different build requirements.
 
 ## Notes
 - Set the debug flag `serialDebug` to `true` to enable debugging. Remember to use the correct baud rate.
-- After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs 4 times as slow.
+- After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs 4 times as slow in its default configuration.
 - For best sensor readings, all sensors must be powered by the 5v rail from the Arduino.
 - The servo must be connected to the Arduino rail.
 - The pump is to be supplied by an external power source.
