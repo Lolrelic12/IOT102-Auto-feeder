@@ -42,8 +42,10 @@ Consult the following flow chart for a visualization of the operation:
 - Yellow LED
 
 ## Build schematics
-An *incomplete* build schematic can be found at: [Tinkercad schematic](https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder/editel?returnTo=/dashboard?collection=designs&sharecode=Eop9zU_BRC4AbcI0ykFd5Q39rgGpT1Hto60VDNmFsO0)<br>
+An *incomplete* build schematic can be found at: 
+[Tinkercad schematic](https://www.tinkercad.com/things/fEtl90w5uD5-project-auto-feeder/editel?returnTo=/dashboard?collection=designs&sharecode=Eop9zU_BRC4AbcI0ykFd5Q39rgGpT1Hto60VDNmFsO0)<br>
 ![Design schematics](design_schematics.png?raw=true)
+[3D model](https://www.tinkercad.com/things/8LKQIESyL2d-auto-feeder/edit?returnTo=%2Fdashboard%3Fcollection%3Ddesigns&sharecode=QTUcKJOES1iWolO2HZC4S1i6tg97KbHkndDt3gVIpTM)
 ![3D model](3d_model.png?raw=true)
 This doesn't include all hardware components since Tinkercad has yet to include components used in the water subsystem.
 All pinout is included in the firmware file. These values can be modified to adapt to different build requirements.
@@ -57,6 +59,7 @@ All pinout is included in the firmware file. These values can be modified to ada
 - The pump is to be supplied by an external power source.
 - Avoid running the pump dry. Prolonged pumping without water can damage the pump.
 - The JQC-3FF-S-Z is a low level trigger relay. As such, its controls are inverted.
+
 
 ## To-do
 - Optimize program loop
