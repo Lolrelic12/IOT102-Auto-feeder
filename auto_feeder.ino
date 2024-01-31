@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  14:27 jan 31, 2024
+// last modified:  18:33 jan 31, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.2.1r2-release";
+const String version = "v1.2.2r1-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -167,6 +167,17 @@ bool detectPresence() {
 // timeout function
 // also flashes the built in led to notify user
 void timeout() {
+  Serial.println("-------------------------------\n");
+
+  Serial.print("FarmWare ");
+  Serial.print(version);
+  Serial.println(" serial debugger\n");
+
+  Serial.println("System timed out due to inactivity.");
+  Serial.println("Press reset button to restart.\n");
+
+  Serial.println("-------------------------------");
+
   while (true) {
     digitalWrite(LED_BUILTIN, HIGH);
     delay(1000);
@@ -178,6 +189,8 @@ void timeout() {
 // for development use only
 // prints debug info to the serial monitor
 void printDebug() {
+  Serial.println("-------------------------------\n");
+
   Serial.print("FarmWare ");
   Serial.print(version);
   Serial.println(" serial debugger\n");
@@ -223,6 +236,8 @@ void printDebug() {
   } else {
     Serial.println("Pump: standby\n");
   }
+
+  Serial.println("-------------------------------");
 
   delay(750);
 }
