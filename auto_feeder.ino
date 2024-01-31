@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  18:33 jan 31, 2024
+// last modified:  18:56 jan 31, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.2.2r2-release";
+const String version = "v1.3.1r0-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -39,6 +39,7 @@ const unsigned long timeoutInterval = 72;  // time interval in hour, default is 
 const int loopDelay = 250;                 // time interval in ms, default is 250ms
 const unsigned long timeoutCount = timeoutInterval * 3600000 / loopDelay;
 int timeSinceLastUpdate = 0;
+int timeRemaining = timeoutInterval - (timeSinceLastUpdate * loopDelay / 3600000);
 
 // the feeder box has 2 states: closed and open
 // these values can be changed to suit a particular installation
@@ -201,10 +202,12 @@ void printDebug() {
   Serial.print((int)distanceThreshold);
   Serial.println("cm");
   Serial.print("Timeout: ");
+  Serial.print(timeRemaining);
+  Serial.print(" hour(s) (");
   Serial.print(timeSinceLastUpdate);
   Serial.print(" / ");
-  Serial.println(timeoutCount);
-  Serial.println();
+  Serial.print(timeoutCount);
+  Serial.println(")\n");
 
   Serial.print("Bowl state: ");
   if (presence == true) {
