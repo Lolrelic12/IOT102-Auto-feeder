@@ -49,8 +49,9 @@ This doesn't include all hardware components since Tinkercad has yet to include 
 All pinout is included in the firmware file. These values can be modified to adapt to different build requirements.
 
 ## Notes
-- Set the debug flag `serialDebug` to `true` to enable debugging. Remember to use the correct baud rate.
+- Set the debug flag `serialDebug` to `true` to enable debugging. Remember to use the correct baud rate. (Default is 9600)
 - After every build and before running, verify sensor calibrations and **disable the debug flag**. Leaving the flag on will make the system runs *at least* 4 times as slow in its default configuration.
+- When calibrating the water level sensor, set the upper limit about 20 units lower than the real limit. This is to avoid an overflow during pumping.
 - For best sensor readings, all sensors must be powered by the 5v rail from the Arduino.
 - The servo must be connected to the Arduino rail.
 - The pump is to be supplied by an external power source.
