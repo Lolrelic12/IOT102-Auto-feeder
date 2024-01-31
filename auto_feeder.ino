@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.2.2r1-release";
+const String version = "v1.2.2r2-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -167,8 +167,6 @@ bool detectPresence() {
 // timeout function
 // also flashes the built in led to notify user
 void timeout() {
-  Serial.println("-------------------------------\n");
-
   Serial.print("FarmWare ");
   Serial.print(version);
   Serial.println(" serial debugger\n");
@@ -189,8 +187,6 @@ void timeout() {
 // for development use only
 // prints debug info to the serial monitor
 void printDebug() {
-  Serial.println("-------------------------------\n");
-
   Serial.print("FarmWare ");
   Serial.print(version);
   Serial.println(" serial debugger\n");
