@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  18:56 jan 31, 2024
+// last modified: 00:05 feb 1, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,7 +29,7 @@
 #include <Servo.h>
 
 
-const String version = "v1.3.1r0-release";
+const String version = "v1.3.1r1-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
@@ -97,10 +97,7 @@ void loop() {
   bowlEmpty = !dark(analogRead(bowlBottom));
   bowlFull = dark(analogRead(bowlTop));
   waterLevel = analogRead(waterReadPin);
-  ;
   presence = detectPresence();
-
-  
 
   // feeder box is open only when bowl is empty and it is not full and no presence is detected
   if (bowlEmpty && !bowlFull && !presence) {
