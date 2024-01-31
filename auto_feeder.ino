@@ -4,7 +4,7 @@
 // group: group 9
 // author: phathnhe187251
 // date created: jan 28, 2024
-// last modified:  13:51 jan 31, 2024
+// last modified:  14:00 jan 31, 2024
 // license: creative commons attribution non commercial share alike (cc by-nc-sa 3.0)
 
 // name: auto feeder
@@ -29,14 +29,14 @@
 #include <Servo.h>
 
 
-const String version = "v1.1.2r0-release";
+const String version = "v1.1.3r1-release";
 const bool serialDebug = false;  // set to true to enable serial debugging
 const int baudRate = 9600;
 
 // timeout values
-// after a determined period of time passes and no changes are registered on the presence detection sensor, the system stops working and must be manually restarted
+// after a determined period of time passes and no changes are registered on the presence detection sensor, the system halts and must be manually restarted
 const unsigned long timeoutInterval = 72;  // time interval in hour, default is 72h
-const int loopDelay = 250;       // time interval in ms, default is 250ms
+const int loopDelay = 250;                 // time interval in ms, default is 250ms
 const unsigned long timeoutCount = timeoutInterval * 3600000 / loopDelay;
 int timeSinceLastUpdate = 0;
 
@@ -73,6 +73,8 @@ int waterLevel = waterFull;
 
 void setup() {
   if (serialDebug == true) Serial.begin(baudRate);
+
+  pinMode(LED_BUILTIN, OUTPUT);
 
   pinMode(bowlBottom, INPUT);
   pinMode(bowlTop, INPUT);
@@ -127,7 +129,7 @@ void loop() {
   if (timeSinceLastUpdate >= timeoutCount) timeout();
 
   prevPresence = presence;
-  
+
   delay(loopDelay);
 }
 
@@ -161,8 +163,12 @@ bool detectPresence() {
 }
 
 // timeout function
+// also flashes the built in led to notify user
 void timeout() {
-  while(true) {
+  while (true) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(1000);
+    digitalWrite(LED_BUILTIN, LOW);
     delay(1000);
   }
 }

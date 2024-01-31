@@ -24,7 +24,7 @@ The feedbox will also be forced close if presence is detected near the feed bowl
 The water pump is controlled by a relay driven by a water level sensor. This sensor has a set lower and upper threshold, as well as a low threshold. Once the water goes below this lower threshold, the pump is turned on. Pumping stops when the max threshold is reached.<br>
 The water level sensor has a multiplier value [0, 1] to determine the low threshold. Values closer to 1 push the threshold higher.<br>
 
-After a predetermined time interval (default is 72h) and the system detects no changes on the presence detector sensor, it will assume that it is not in active use, i.e. no animals are present on the premise at all. It will then timeout, requiring a manual restart to be used again.
+After a predetermined time interval (default is 72h) and the system detects no changes on the presence detector sensor, it will assume that it is not in active use, i.e. no animals are present on the premise at all. It will then timeout, requiring a manual restart to be used again. The onboard LED will blink to notify the operator when this happens.
 
 Consult the following flow chart for a visualization of the operation:
 ![Program flow chart](program_flow.png?raw=true)
