@@ -55,13 +55,13 @@ const int pumpRelayPin = 7;
 const int trigPin = 3, echoPin = 4;
 bool presence = true;
 bool prevPresence = presence;
-const float distanceThreshold = 10;  // change to configure how close to the sensor is considered present, in cm
+const float distanceThreshold = 15;  // change to configure how close to the sensor is considered present, in cm
 
 // photoresistor calibrations
 const int bowlBottom = A0, bowlTop = A1;
 bool bowlFull = true, bowlEmpty = false;
 int photoresMin = 1, photoresMax = 860;  // tune these values before running (measured with 330 ohm resistors)
-const float sensitivity = 0.025;         // value from 0 to 1
+const float sensitivity = 0.015;         // value from 0 to 1
 int photoresThreshold = (photoresMin + photoresMax) * sensitivity;
 
 // water sensor calibrations
